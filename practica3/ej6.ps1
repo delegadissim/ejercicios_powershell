@@ -1,5 +1,5 @@
 ﻿# Saber si existe una carpeta / arxivo y hace ls
-
+clear-host
 $ruta = Read-Host "Escribe la ruta al archivo/directorio"
 
 if (Test-Path -PathType Container $ruta){
