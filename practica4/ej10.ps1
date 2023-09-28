@@ -20,6 +20,7 @@ f) Mostrar el contenido de un directorio.
 g) Mostar la fecha y hora actuales
 
 x) Salir
+
 "
 
     switch ($opcio){
@@ -38,24 +39,40 @@ x) Salir
         {$_ -eq "c"}{
             $path = Read-Host "Introduce el path al fichero que quieres cambiar el nombre"
             $new_name = read-host "Introduce el nuevo nombre"
-            rename-item -Path $path -newname $nombre
-            get-child -path $path
+            Rename-Item -Path $path -newname $new_name
+            read-host "`n`nPresiona enter para continuar"
+            clear-host
         }
 
         {$_ -eq "d"}{
-        echo "cambiar nombre"
+            $path = Read-Host "Introduce el path al fichero que borrar"
+            del $path
+            read-host "`n`nPresiona enter para continuar"
+            clear-host
         }
 
         {$_ -eq "e"}{
-        echo "cambiar nombre"
+            $archivo = Read-Host "Introduce el path al fichero que quieres comprobar si existe o no"
+            if (Test-Path $archivo) {
+                Write-Host "El archivo existe."
+            } else {
+                Write-Host "El archivo no existe."
+            }
+            read-host "`n`nPresiona enter para continuar"
+            clear-host
         }
 
         {$_ -eq "f"}{
-        echo "cambiar nombre"
+            $archivo = Read-Host "Introduce el path al directorio que quieres mostrar"
+            Get-ChildItem $archivo
+            read-host "`n`nPresiona enter para continuar"
+            clear-host
         }
 
         {$_ -eq "g"}{
-        echo "cambiar nombre"
+            write-host "`n`n$(get-date)"
+            read-host "`n`nPresiona enter para continuar"
+            clear-hos
         }
     }
 }
