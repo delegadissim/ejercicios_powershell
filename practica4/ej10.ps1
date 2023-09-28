@@ -4,6 +4,7 @@ $opcio = "a"
 while ($opcio -ne "x"){
     $opcio=read-host "
 
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 a) Crear una carpeta
 
