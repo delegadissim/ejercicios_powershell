@@ -4,7 +4,7 @@ clear-host
 
 #Per a borrar els anteriors (per si hem fet proves o qualsevol cosa)
 Remove-ADOrganizationalUnit -Identity "OU=Empresa,DC=EMPRESA,DC=LOCAL" -Recursive -Confirm:$false
-
+Read-Host "`n`nLos archivos:`n`n`t-departamentos.csv`n`t-empleados.csv`n`nEstan en el escritorio del usuario Administrador?`n (Si no lo estan ponlos)`n`nUna vez esten presiona enter para continuar"
 
 
 
