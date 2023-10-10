@@ -23,9 +23,11 @@ foreach ($dep in $departament)
 
 #Generem els empleats, i els assignem el seu grup corresponent
 $usuaris= Import-Csv C:\Users\Administrador\Desktop\empleados.csv -Delimiter ";"
+
 foreach ($usu in $usuaris)
 {
-    New-ADUser -Name $($usu.nombre) -Path "OU=$($usu.Departamento),OU=Empresa,DC=Empresa,DC=Local" -SamAccountName "$($usu.nombre)$($usu.apellido)" -UserPrincipalName "$($usu.nombre)$($usu.apellido)@empresa.local" -AccountPassword (ConvertTo-SecureString "aso2021." -AsPlainText -Force) -GivenName "$($usu.nombre)" -Surname "$($usu.apellido)" -ChangePasswordAtLogon $true -Enabled $true
+    New-ADUser -Name $($usu.nombre) -Path "OU=$($usu.Departamento),OU=Empresa,DC=Empresa,DC=Local" -SamAccountName "$($usu.nombre).$($usu.apellido)" -UserPrincipalName "$($usu.nombre).$($usu.apellido)@empresa.local" -AccountPassword (ConvertTo-SecureString "aso2021." -AsPlainText -Force) -GivenName "$($usu.nombre)" -Surname "$($usu.apellido)" -ChangePasswordAtLogon $true -Enabled $true
+    Add-ADGroupMember -Identity "$($usu.departamento)" -Members "$($usu.nombre).$($usu.apellido)"
 }
 
 
