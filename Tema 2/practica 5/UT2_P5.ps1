@@ -23,4 +23,35 @@ foreach ($dep in $departaments){
     #Grant-SmbShareAccess -Name $($dep.departamento) -AccountName Administradores -AccessRight Full -Force
     #Grant-SmbShareAccess -Name $($dep.departamento) -AccountName "Usuarios del dominio" -AccessRight Read -Force
     Revoke-SmbShareAccess -Name $($dep.departamento) -AccountName todos -Force
+
+
+
+
+    
+    $acl = get-acl -Path $empresa$($dep.departamento)
+    $acl.SetAccessRuleProtection($true, $false)
+
+    $permiso='Administradores', 'FullControl', 'ContainerInherit,ObjectInherit', 'None', 'Allow'
+    $ace= New-Object -TypeName System.Security.AccessControl.FileSystemAccessRule -ArgumentList $permiso
+    $acl.SetAccessRule($ace)
+    $ace | Format-Table
+
+
+    $permiso='Usuarios del dominio', 'Read', 'ContainerInherit,ObjectInherit', 'None', 'Allow'
+    $ace= New-Object -TypeName System.Security.AccessControl.FileSystemAccessRule -ArgumentList $permiso
+    $acl.SetAccessRule($ace)
+    $ace | Format-Table
+
+    $permiso="$($dep.departamento)", 'Modify', 'ContainerInherit,ObjectInherit', 'None', 'Allow'
+    $ace= New-Object -TypeName System.Security.AccessControl.FileSystemAccessRule -ArgumentList $permiso
+    $acl.SetAccessRule($ace)
+    $ace | Format-Table
+
+    #$comp = Read-Host "Introduce yes si quieres poner esos permisos"
+    #if ( $comp -eq "yes" ){
+        $acl | Set-Acl -Path $empresa$($dep.departamento)
+    #}
+
+
+
 }
