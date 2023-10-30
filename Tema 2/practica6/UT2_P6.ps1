@@ -42,5 +42,7 @@ foreach ($emp in $empleats){
     
     Set-ADUser -Identity "$($emp.nombre).$($emp.apellido)" -ScriptPath "carpetas$($emp.departamento).bat" -HomeDrive "Z:" -HomeDirectory "\\server\Empresa_users$\$($emp.nombre).$($emp.apellido)"
 
-
+    if ($($emp.departamento) -eq "PERSONAL"){
+        Set-ADUser -Identity "$($emp.nombre).$($emp.apellido)" -ProfilePath "\\server\Empresa_users$\$($emp.nombre).$($emp.apellido)"
+    }
 }
